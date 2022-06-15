@@ -4,15 +4,17 @@ services:
     image: nginx:1.22
     volumes:
       - ./etc/nginx/conf.d:/etc/nginx/conf.d
+      - ./etc/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./public:/public
+      - ./log/nginx:/var/log/nginx
     ports:
       - "80:80"
     links:
       - app
 
   app:
-    cpus: 1
-    mem_limit: 1g
+    cpus: 2
+    mem_limit: 4g
     # Go実装の場合は golang/ PHP実装の場合は php/
     build: golang/
     environment:
@@ -30,8 +32,8 @@ services:
     init: true
 
   mysql:
-    cpus: 1
-    mem_limit: 1g
+    cpus: 2
+    mem_limit: 4g
     image: mysql/mysql-server:8.0
     environment:
       - "TZ=Asia/Tokyo"
