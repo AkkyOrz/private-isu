@@ -42,7 +42,7 @@ services:
     volumes:
       - mysql:/var/lib/mysql
       - ./etc/my.cnf:/etc/my.cnf
-      - ./sql:/docker-entrypoint-initdb.d
+      - ./sql:/docker-entrypoint-initdb.d # mysqlのデータを初期化するためのSQLを書く場所
       - ./log/mysql:/var/log/mysql
     ports:
       - "3306:3306"
